@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    pass VARCHAR(255) NOT NULL,
+    userData JSON NOT NULL,
+    userData2 JSON NOT NULL,
+    PRIMARY KEY (id)
+)  ENGINE=INNODB;

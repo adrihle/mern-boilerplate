@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { Router, Route, Switch } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 
-function App() {
+//importing components
+import Form from './client/components/Form'
+import Greetings from './client/components/Greetings'
+
+//pose settings
+import { PoseGroup } from 'react-pose'
+import { RouteContainer } from './client/pose/defaultPose'
+
+//importing routes
+import { signUp, greetins } from './Routes'
+
+const history = createBrowserHistory()
+
+export default function App (){
+
+  useEffect(() => {
+    history.push(signUp)
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div className='text-center'>
+    <Router history={history}>
+      <Route render={({ location }) => (
+        <PoseGroup>
+            <RouteContainer key={location.pathname}>
+              <Switch>
+                <Route exact path={signUp} component={Form} />
+                <Route path={greetins} component={Greetings}/>
+              </Switch>
+            </RouteContainer>
+        </PoseGroup>
+      )} />
+    </Router>
+  </div>
+  )
 }
-
-export default App;
