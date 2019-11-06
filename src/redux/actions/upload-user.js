@@ -1,6 +1,11 @@
-const uploadUserRequest = (payload) => ({
-    type: 'UPLOAD_USER_REQUEST',
+import {UPLOAD_USER_REQUEST, UPLOAD_USER_RESET} from '../constants'
+
+export const uploadUserRequest = (payload) => ({
+    type: UPLOAD_USER_REQUEST,
     payload
 })
 
-export default uploadUserRequest
+export const uploadUserReset = () => ({
+    type: UPLOAD_USER_RESET
+})
+

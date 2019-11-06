@@ -1,21 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+//redux dependencies
+import { useDispatch, useSelector } from 'react-redux'
+import signMode from '../../redux/actions/sign-choose'
+
+//importing components
+import { Tabs, Tab } from '@material-ui/core'
+
+//styles dependencies
+import { ThemeProvider } from '@material-ui/core/styles'
+import  defaultTheme  from '../themes/defaultTheme'
 
 
-const Title = ({ title }) => (
-    <span 
-        className='text-white mb-3 mt-3 mr-4 h2' 
-        style={{ textShadow: '0.5px 0.5px gray', cursor: 'pointer' }} 
-        onClick={() => console.log(title)}
-    >
-        {title}
-    </span>
-)
+export default function SignChooser() {
+    const focusTab = useSelector(state => state.signMode)
+    const [selected, setSelected] = useState(0)
+    const dispatch = useDispatch()
 
-const SignChooser = (props) => (
-    <div>
-        <Title title='Sign In' signIn={props.signIn}/>
-        <Title title='Sign Up' signIn={props.signIn}/>
-    </div>
-)
+    useEffect(() => {
+        if (focusTab){
+            setSelected(0)
+        }else {
+            setSelected(1)
+        }
+    },[focusTab])
 
-export default SignChooser
+    //event input required for component
+    const onChange = (event, newSelected) => {
+        setSelected(newSelected)
+        dispatch(signMode())
+    }
+
+    return (
+        <ThemeProvider theme={defaultTheme}>
+            <Tabs
+                centered={true}
+                value={selected}
+                indicatorColor="primary"
+                textColor='primary'
+                onChange={onChange}
+            >
+                <Tab id='tab' label='Sign In'/>
+                <Tab id='tab' label='Sign Up' />
+            </Tabs>
+        </ThemeProvider>
+    )
+}

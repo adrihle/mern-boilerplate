@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 //setup mysql connection
 const pool = mysql.createPool(database)
 
-//initialize rest api
+//initialize rest api for upload user
 const queryUploadUser = 'INSERT INTO users set ?'
 
 app.post('/newUser', (req, res) => {
@@ -41,5 +41,25 @@ app.post('/newUser', (req, res) => {
         res.send(response)
     })
 
+})
+
+//initialize rest api for sign in user
+const querySignIn = 'SELECT pass FROM users WHERE username = ?'
+
+app.post('/login', (req, res) => {
+    const { username, pass } = req.body
+
+    queryOneValue(pool, querySignIn, username)
+    .then( e => {
+        if (!e[0]){
+            res.send('INCORRECT_USERNAME')
+        }else {
+            if (e[0].pass !== pass){
+                res.send('INCORRECT_PASSWORD')
+            }else {
+                res.send('SIGN_IN_SUCCESS')
+            }
+        }
+    })
 })
 
