@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 
 //importing components
-import Form from './client/components/userSign'
+import Form from './client/views/Login'
 import Greetings from './client/components/Greetings'
 
 //pose settings

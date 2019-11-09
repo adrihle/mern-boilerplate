@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const { database } = require('../config/keys')
+const axios = require('axios')
 
 //functions dependencies
 const { queryOneValue } = require('./commons')
@@ -29,14 +30,10 @@ const pool = mysql.createPool(database)
 const queryUploadUser = 'INSERT INTO users set ?'
 
 app.post('/newUser', (req, res) => {
-    const { username, pass, userData, userData2 } = req.body
-    const newUser = { 
-        username, 
-        pass, 
-        userData: JSON.stringify(userData), 
-        userData2: JSON.stringify(userData2) }
+    const { email, pass } = req.body
+    const upload = { email, pass}
 
-    queryOneValue(pool, queryUploadUser, newUser)
+    queryOneValue(pool, queryUploadUser, upload)
     .then(response => {
         res.send(response)
     })
@@ -44,12 +41,12 @@ app.post('/newUser', (req, res) => {
 })
 
 //initialize rest api for sign in user
-const querySignIn = 'SELECT pass FROM users WHERE username = ?'
+const querySignIn = 'SELECT pass FROM users WHERE email = ?'
 
 app.post('/login', (req, res) => {
-    const { username, pass } = req.body
+    const { email, pass } = req.body
 
-    queryOneValue(pool, querySignIn, username)
+    queryOneValue(pool, querySignIn, email)
     .then( e => {
         if (!e[0]){
             res.send('INCORRECT_USERNAME')
@@ -60,6 +57,15 @@ app.post('/login', (req, res) => {
                 res.send('SIGN_IN_SUCCESS')
             }
         }
+    })
+})
+
+const query = 'SELECT * FROM users'
+
+app.get('/data:id', (req, res) => {
+    const id = req.params
+    pool.query(query, (err, rows) => {
+        res.send(id)
     })
 })
 
