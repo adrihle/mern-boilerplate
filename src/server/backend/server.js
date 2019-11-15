@@ -3,11 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
-const { database } = require('../config/keys')
-const axios = require('axios')
+const { database, cloudinary } = require('../config/keys')
+const cloudinaryApp = require('cloudinary')
+const formData = require('express-form-data')
 
 //functions dependencies
-const { queryOneValue } = require('./commons')
+const { queryOneInputValue, queryNoInputValue } = require('../fns')
+
+//importing queries strings
+const { queryUploadUser, querySignIn, queryCheckEmail } = require('../queries')
 
 //initialize server
 const app = express()
@@ -27,13 +31,19 @@ app.use(bodyParser.json())
 const pool = mysql.createPool(database)
 
 //initialize rest api for upload user
-const queryUploadUser = 'INSERT INTO users set ?'
-
 app.post('/newUser', (req, res) => {
-    const { email, pass } = req.body
-    const upload = { email, pass}
+    const { email, pass, username, url } = req.body
+    const upload = { 
+        email, 
+        pass,
+        userData: JSON.stringify({username, url}),
+        billData: JSON.stringify({}),
+        tourData: JSON.stringify({}),
+        scoreData: JSON.stringify({}),
+        socialData: JSON.stringify({})
+    }
 
-    queryOneValue(pool, queryUploadUser, upload)
+    queryOneInputValue(pool, queryUploadUser, upload)
     .then(response => {
         res.send(response)
     })
@@ -41,12 +51,10 @@ app.post('/newUser', (req, res) => {
 })
 
 //initialize rest api for sign in user
-const querySignIn = 'SELECT pass FROM users WHERE email = ?'
-
 app.post('/login', (req, res) => {
     const { email, pass } = req.body
 
-    queryOneValue(pool, querySignIn, email)
+    queryOneInputValue(pool, querySignIn, email)
     .then( e => {
         if (!e[0]){
             res.send('INCORRECT_USERNAME')
@@ -60,12 +68,25 @@ app.post('/login', (req, res) => {
     })
 })
 
-const query = 'SELECT * FROM users'
+//initialize rest api for upload image to cloudinary
+cloudinaryApp.config(cloudinary)
 
-app.get('/data:id', (req, res) => {
-    const id = req.params
-    pool.query(query, (err, rows) => {
-        res.send(id)
-    })
+app.use(formData.parse())
+
+app.post('/newUserImage', (req, res) => {
+    cloudinaryApp.uploader.upload(req.files[0].path)
+      .then((image) => {
+          res.send(image.url)
+      }) 
+})
+
+//sample
+app.post('/checkEmails', (req, res) => {
+    const { email } = req.body
+    queryOneInputValue(pool, queryCheckEmail, email)
+    .then(async e => {
+        if (e[0]) return true
+        else return false
+    }).then (e => res.send(e))
 })
 

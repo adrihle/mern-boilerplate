@@ -4,7 +4,12 @@ import { createBrowserHistory } from 'history'
 
 //importing components
 import Form from './client/views/Login'
-import Greetings from './client/components/Greetings'
+import Greetins from './client/views/greetins'
+import NavBar from './client/components/navigation/navbar'
+
+//general styles
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './client/themes/defaultTheme'
 
 //pose settings
 import { PoseGroup } from 'react-pose'
@@ -15,26 +20,30 @@ import { signUp, greetins } from './Routes'
 
 const history = createBrowserHistory()
 
-export default function App (){
+export default function App() {
 
   useEffect(() => {
     history.push(signUp)
-  },[])
+  }, [])
 
   return (
-    <div className='text-center'>
-    <Router history={history}>
-      <Route render={({ location }) => (
-        <PoseGroup>
-            <RouteContainer key={location.pathname}>
-              <Switch>
-                <Route exact path={signUp} component={Form} />
-                <Route path={greetins} component={Greetings}/>
-              </Switch>
-            </RouteContainer>
-        </PoseGroup>
-      )} />
-    </Router>
-  </div>
+    <ThemeProvider theme={theme}>
+        <div className='template'>
+        <Router history={history}>
+          <NavBar />
+          <Route render={({ location }) => (
+            <PoseGroup>
+              <RouteContainer key={location.pathname}>
+                <Switch>
+                  <Route exact path={signUp} component={Form} />
+                  <Route path={greetins} component={Greetins} />
+                </Switch>
+              </RouteContainer>
+            </PoseGroup>
+          )} />
+        </Router>
+          
+        </div>
+    </ThemeProvider>
   )
 }
