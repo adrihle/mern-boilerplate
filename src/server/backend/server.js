@@ -8,7 +8,7 @@ const cloudinaryApp = require('cloudinary')
 const formData = require('express-form-data')
 
 //functions dependencies
-const { queryOneInputValue, queryNoInputValue } = require('../fns')
+const { queryOneInputValue, loginData } = require('../fns')
 
 //importing queries strings
 const { queryUploadUser, querySignIn, queryCheckEmail } = require('../queries')
@@ -57,13 +57,15 @@ app.post('/login', (req, res) => {
     queryOneInputValue(pool, querySignIn, email)
     .then( e => {
         if (!e[0]){
-            res.send('INCORRECT_USERNAME')
+            e[0].type = 'INCORRECT_USERNAME'
+            res.send(e[0])
         }else {
             if (e[0].pass !== pass){
-                res.send('INCORRECT_PASSWORD')
+                e[0].type = 'INCORRECT_PASSWORD'
             }else {
-                res.send('SIGN_IN_SUCCESS')
+                e[0].type = 'SIGN_IN_SUCCESS'
             }
+            res.send(loginData(e[0]))
         }
     })
 })

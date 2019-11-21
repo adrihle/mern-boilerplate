@@ -29,4 +29,10 @@ exports.queryNoInputValue = function(pool, query){
     })
 }
 
+exports.loginData = function(user){
+    user.userData = JSON.parse(user.userData)
+    user.pass = ''
+    return user
+}
+
 

@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 
 //importing components
 import Form from './client/views/Login'
-import Greetins from './client/views/greetins'
+import Home from './client/views/home'
 import NavBar from './client/components/navigation/navbar'
 
 //general styles
@@ -16,7 +16,7 @@ import { PoseGroup } from 'react-pose'
 import { RouteContainer } from './client/pose/defaultPose'
 
 //importing routes
-import { signUp, greetins } from './Routes'
+import { signUp, home } from './Routes'
 
 const history = createBrowserHistory()
 
@@ -36,7 +36,7 @@ export default function App() {
               <RouteContainer key={location.pathname}>
                 <Switch>
                   <Route exact path={signUp} component={Form} />
-                  <Route path={greetins} component={Greetins} />
+                  <Route path={home} component={Home} />
                 </Switch>
               </RouteContainer>
             </PoseGroup>

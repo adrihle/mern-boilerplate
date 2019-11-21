@@ -40,11 +40,11 @@ export const SubmitButton = ({ text, id, loading, ...rest }) => (
     </Button>
 )
 
-export const UserAvatar = ({ alt, url, upload, navbar, onChange, ...rest }) => {
+export const UserAvatar = ({ alt, url, id, upload, navbar, onChange, ...rest }) => {
     const classes = useStyles()
 
     return (
-        <IconButton component='label' id='avatar'>
+        <IconButton component='label' id={id}>
             {upload ?
                 <input type='file' onChange={onChange} style={{ display: 'none' }} />
                 :

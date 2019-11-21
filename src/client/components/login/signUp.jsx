@@ -8,7 +8,7 @@ import Form from '../form/form'
 import { InputField, SubmitButton, UserAvatar } from '../form/components'
 
 export default function ({ schema, action }) {
-    const state = useSelector(state => state.newUser)
+    const state = useSelector(state => state.signUp)
     const [photo, setPhoto] = useState(state.user.url)
     const [image, setImage] = useState(null)
 
@@ -29,7 +29,7 @@ export default function ({ schema, action }) {
 
     return (
         <Form onSubmit={onSubmit} schema={schema}>
-            <UserAvatar upload alt='avatar' url={photo} onChange={onChange} />
+            <UserAvatar upload alt='avatar' url={photo} onChange={onChange} id='avatar-central'/>
             <InputField label='Username' name='username' />
             <InputField label='Email' name='email' />
             <InputField label='Password' name='pass' type='password' />

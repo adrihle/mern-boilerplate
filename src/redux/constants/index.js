@@ -14,6 +14,14 @@ export const MSG_UPLOAD_ERROR = {
     title: 'Uploading error ocurred',
     content: 'A error uploading a new user ocurred, please check your internet connection'
 }
+export const MSG_WRONG_USER = {
+    title: 'Incorrect email',
+    content: 'The email adress doesnt belong to any user'
+}
+export const MSG_WRONG_PASSWORD = {
+    title: 'Incorrect password',
+    content: 'Try with another password'
+}
 //sign in user
 export const SIGN_IN_REQUEST = 'SIGN_USER_REQUEST'
 export const INCORRECT_USERNAME = 'INCORRECT_USERNAME'

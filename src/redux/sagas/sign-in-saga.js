@@ -10,7 +10,7 @@ function* loginWorker (action){
     try{
         const status = yield login(action.payload)
         if (status){
-            yield put ({ type: status.data })
+            yield put ({ type: status.data.type, payload: status.data })
         }
     }catch(e){
         return yield e

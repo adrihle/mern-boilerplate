@@ -6,8 +6,7 @@ const initialState = {
     },
     loading: false,
     error: false,
-    errorMessage: '',
-    signUpSuccess: false
+    message: ''
 }
 
 export default function newUser (state=initialState, action){
@@ -15,11 +14,11 @@ export default function newUser (state=initialState, action){
         case UPLOAD_USER_REQUEST:
             return {...state, user: action.payload, loading: true}
         case EMAIL_ALREADY_REGISTERED:
-            return {...state, loading: false, error: true, errorMessage: MSG_EMAIL_EXIST}
+            return {...state, loading: false, error: true, message: MSG_EMAIL_EXIST}
         case USER_UPLOADED:
-            return {...state, signUpSuccess: true, loading: false}
+            return {...state, success: true, loading: false}
         case UPLOAD_USER_ERROR:
-            return {...state, loading: false, error: true, errorMessage: MSG_UPLOAD_ERROR}
+            return {...state, loading: false, error: true, message: MSG_UPLOAD_ERROR}
         case UPLOAD_USER_RESET:
             return state = initialState
         default:

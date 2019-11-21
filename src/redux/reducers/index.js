@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import newUser from './upload-user-reducer'
+import signUp from './sign-up-reducer'
 import signIn from './sign-in-reducer'
 
 export default combineReducers({
-    newUser,
+    signUp,
     signIn
 })
