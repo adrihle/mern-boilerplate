@@ -40,11 +40,11 @@ export const SubmitButton = ({ text, id, loading, ...rest }) => (
     </Button>
 )
 
-export const UserAvatar = ({ alt, url, id, upload, navbar, onChange, ...rest }) => {
+export const UserAvatar = ({ alt, url, id, upload, navbar, onClick, onChange, ...rest }) => {
     const classes = useStyles()
 
     return (
-        <IconButton component='label' id={id}>
+        <IconButton component='label' id={id} onClick={onClick} aria-haspopup="true">
             {upload ?
                 <input type='file' onChange={onChange} style={{ display: 'none' }} />
                 :

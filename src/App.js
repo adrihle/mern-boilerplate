@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 
 //importing components
-import Form from './client/views/Login'
+import Login from './client/views/Login'
 import Home from './client/views/home'
 import NavBar from './client/components/navigation/navbar'
 
@@ -16,14 +16,14 @@ import { PoseGroup } from 'react-pose'
 import { RouteContainer } from './client/pose/defaultPose'
 
 //importing routes
-import { signUp, home } from './Routes'
+import { login, home } from './Routes'
 
 const history = createBrowserHistory()
 
 export default function App() {
 
   useEffect(() => {
-    history.push(signUp)
+    history.push(login)
   }, [])
 
   return (
@@ -35,7 +35,7 @@ export default function App() {
             <PoseGroup>
               <RouteContainer key={location.pathname}>
                 <Switch>
-                  <Route exact path={signUp} component={Form} />
+                  <Route exact path={login} component={Login} />
                   <Route path={home} component={Home} />
                 </Switch>
               </RouteContainer>

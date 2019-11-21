@@ -57,8 +57,8 @@ app.post('/login', (req, res) => {
     queryOneInputValue(pool, querySignIn, email)
     .then( e => {
         if (!e[0]){
-            e[0].type = 'INCORRECT_USERNAME'
-            res.send(e[0])
+            let e1 = { type: 'INCORRECT_USERNAME'}
+            res.send(e1)
         }else {
             if (e[0].pass !== pass){
                 e[0].type = 'INCORRECT_PASSWORD'
