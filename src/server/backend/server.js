@@ -8,10 +8,10 @@ const cloudinaryApp = require('cloudinary')
 const formData = require('express-form-data')
 
 //functions dependencies
-const { queryOneInputValue, loginData } = require('../fns')
+const { queryOneInputValue, queryNoInputValue, loginData } = require('../fns')
 
 //importing queries strings
-const { queryUploadUser, querySignIn, queryCheckEmail } = require('../queries')
+const { queryUploadUser, querySignIn, queryAllUsers } = require('../queries')
 
 //initialize server
 const app = express()
@@ -82,13 +82,25 @@ app.post('/newUserImage', (req, res) => {
       }) 
 })
 
-//sample
+//rest api for check existing emails registered
 app.post('/checkEmails', (req, res) => {
     const { email } = req.body
-    queryOneInputValue(pool, queryCheckEmail, email)
+    queryOneInputValue(pool, querySignIn, email)
     .then(async e => {
         if (e[0]) return true
         else return false
     }).then (e => res.send(e))
 })
+
+//sample
+app.get('/allUsers', (req, res) => {
+    queryNoInputValue(pool, queryAllUsers)
+    .then( async e => {
+        e.map(user => {
+            user.userData = JSON.parse(user.userData)
+        })
+        return e
+    }).then( e => res.send(e))
+})
+
 

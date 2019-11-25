@@ -1,6 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { SIGN_IN_REQUEST, urlAPI_SIGN_IN } from '../constants'
 import axios from 'axios'
+import { SIGN_IN_REQUEST, urlAPI_SIGN_IN } from '../constants'
+
 
 function* login ( user ){
     return yield ( axios.post( urlAPI_SIGN_IN, user ) )

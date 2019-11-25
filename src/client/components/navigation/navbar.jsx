@@ -33,7 +33,7 @@ export default function () {
                                 navbar
                                 alt='Menu'
                                 onClick={openMenu}
-                                url={stateIn.user ? stateIn.user.userData.url : stateUp.user.url}
+                                url={stateIn.success ? stateIn.user.userData.url : stateUp.user.url}
                             />
                         </Bounce>
                         :

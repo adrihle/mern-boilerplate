@@ -3,6 +3,7 @@ export const urlAPI_UPLOAD_USER = 'http://192.168.1.75:4000/newUser'
 export const urlAPI_UPLOAD_USER_IMAGE = 'http://192.168.1.75:4000/newUserImage'
 export const urlAPI_CHECK_EMAIL = 'http://192.168.1.75:4000/checkEmails'
 export const urlAPI_SIGN_IN = 'http://192.168.1.75:4000/login'
+export const urlAPI_DOWNLOAD_USERS = 'http://192.168.1.75:4000/allUsers'
 //url images
 export const USERLESS_AVATAR = 'http://greenpathcr.com/wp-content/uploads/2019/09/user_circle_1048392.png'
 //error messages
@@ -37,3 +38,7 @@ export const UPLOAD_USER_IMAGE_REQUEST = 'UPLOAD_USER_IMAGE_REQUEST'
 export const USER_IMAGE_UPLOADED = 'USER_IMAGE_UPLOADED'
 export const UPLOAD_USER_IMAGE_ERROR = 'UPLOAD_USER_IMAGE_ERROR'
 export const EMAIL_ALREADY_REGISTERED = 'EMAIL_ALREADY_REGISTERED'
+//download users
+export const LOAD_USERS_REQUEST = 'LOAD_USERS_REQUEST'
+export const LOAD_USERS_ERROR = 'LOAD_USERS_ERROR'
+export const LOAD_USERS_SUCCESSS = 'LOAD_USERS_SUCCESS'

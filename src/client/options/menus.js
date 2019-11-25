@@ -1,10 +1,10 @@
 import { signInReset } from '../../redux/actions/sign-in-action'
 
-const menu = (title, route, logout, action) => {
+const generateMenu = (title, route, logout, action) => {
     return {title, route, logout, action}
 }
 
 export const navbarMenu = [
-    menu('Profile', '/home'),
-    menu('Logout', '/login', true, signInReset)
+    generateMenu('Profile', '/home'),
+    generateMenu('Logout', '/login', true, signInReset)
 ]
