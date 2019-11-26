@@ -22,7 +22,7 @@ export default function () {
     const openMenu = event => setAnchor(event.currentTarget)
     const closeMenu = () => setAnchor(null)
     return (
-        <Slide appear={false} direction='down' in={!useScrollTrigger()}>
+        <Slide appear={false} direction='down' in={!useScrollTrigger()} id='slide-navbar'>
             <AppBar position='sticky' id='navbar'>
                 <Toolbar id='navbar-content'>
                     <Text variant='h5' color='textPrimary'>NavBar</Text>

@@ -10,8 +10,8 @@ const useStyles = makeStyles({
     },
     bigAvatar: {
         margin: 10,
-        width: 150,
-        height: 150
+        width: 80,
+        height: 80
     }
 })
 

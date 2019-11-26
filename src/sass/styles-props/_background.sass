@@ -1,12 +1,27 @@
 @import '../styles-variables/background'
 
-body 
+
+html,body 
     background: $backgroundColor
     background: $backgroundGradient
     background: $backgroundGradientCompatible
+    
+    width: 100%
+    -webkit-box-sizing: border-box
+       -moz-box-sizing: border-box
+            box-sizing: border-box
+    
+    
 
 .template
     text-align:  center
     width: 100% !important
+
+.slick-slider
+    overflow-x: hidden
+
+#slide-navbar
+    overflow-y: scroll
+    margin-bottom: 1em
 
 
