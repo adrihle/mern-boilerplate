@@ -14,7 +14,7 @@
     "history": "^4.10.1",
     "material-table": "^1.54.1",
     "mysql": "^2.17.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
